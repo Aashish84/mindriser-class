@@ -1,13 +1,10 @@
-import React, { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-export default function ProtectedRoute() {
+export default function ProtectedRoute(props) {
   const navigate = useNavigate();
-  const [loginStatus, setLoginStatus] = useState(false);
-
+  const loginStatus = props.isLogin();
   if (loginStatus) {
     return <Outlet />;
   }
-
-  return navigate("/login");
+  navigate("/login");
 }

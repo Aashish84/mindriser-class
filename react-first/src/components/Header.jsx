@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Header() {
+function Header(props) {
   return (
     <div className="header">
       <h1>header</h1>
@@ -16,6 +16,9 @@ function Header() {
         </li>
         <li>
           <Link to="/user">user</Link>
+        </li>
+        <li>
+          <button onClick={props.handleLogout}>logout</button>
         </li>
       </ul>
     </div>

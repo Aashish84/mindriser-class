@@ -1,14 +1,14 @@
-function Login() {
+import { useNavigate } from "react-router-dom";
+
+function Login(props) {
+  const navigate = useNavigate();
   function handleSubmit(event) {
     event.preventDefault();
     const username = event.target.username.value;
     const password = event.target.password.value;
-    if (username === "asis" && password === "asis") {
-      // if username == asis  && password == asis then change state of ProtectedRoute
-      console.log("valid data");
-    } else {
-      console.log("invalid data");
-    }
+
+    props.validateLogin(username, password);
+    navigate("/user");
   }
 
   return (
