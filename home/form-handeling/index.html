@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <form onsubmit="handler(event)">
+      <input type="text" name="yourname" placeholder="enter name" />
+      <input type="submit" />
+    </form>
+
+    <script>
+      let handler = (event) => {
+        event.preventDefault();
+        let { yourname } = event.target;
+        console.log(yourname.value);
+      };
+    </script>
+  </body>
+</html>

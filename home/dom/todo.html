@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input
+      type="text"
+      class="todo"
+      placeholder="enter task"
+      onkeypress="onEnter(event)"
+    />
+    <button onclick="addTask()">submit</button>
+    <ul class="task-list">
+      <li id="dummy">
+        task one
+        <button type="button" onclick="deleteTask('dummy')">delete</button>
+      </li>
+    </ul>
+
+    <script>
+      function onEnter(event) {
+        // event.preventDefault();
+        if (event.key == "Enter") {
+          addTask();
+        }
+      }
+      function addTask() {
+        let todo = document.querySelector(".todo").value;
+        if (todo) {
+          // unique id
+          const count = document.querySelector(".task-list").childElementCount;
+          let id = `A${count}`;
+
+          //   creating li tag
+          const li = document.createElement("li");
+          const text = document.createTextNode(todo + " ");
+          li.setAttribute("id", id);
+          li.appendChild(text);
+
+          //   creating button tag
+          const button = document.createElement("button");
+          button.appendChild(document.createTextNode("delete"));
+          button.setAttribute("onclick", `deleteTask("${id}") `);
+
+          //   adding button tag inside li
+          li.appendChild(button);
+
+          // adding li inside ul
+          let list = document.querySelector(".task-list");
+          list.appendChild(li);
+
+          document.querySelector(".todo").value = "";
+        }
+      }
+      function deleteTask(id) {
+        const myElement = document.querySelector(`#${id}`);
+        myElement.remove();
+      }
+    </script>
+  </body>
+</html>

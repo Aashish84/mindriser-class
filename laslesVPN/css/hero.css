@@ -1,0 +1,124 @@
+:root {
+  --bold_color: #0b132a;
+  --light_color: #4f5665;
+  --bg_red: #f53855;
+}
+
+.hero-img > img {
+  width: 100%;
+  max-height: 385px;
+  padding: 10px 0px;
+}
+.hero-title {
+  font-weight: 500;
+  font-size: 30px;
+  color: var(--bold_color);
+  padding: 10px 0px;
+}
+.hero-title > span {
+  font-weight: 700;
+}
+.hero-desc {
+  font-size: 16px;
+  color: var(--light_color);
+  padding-bottom: 10px;
+}
+.hero-btn {
+  max-width: 250px;
+  padding: 17px 75px;
+  background-color: var(--bg_red);
+  color: #fff;
+  border-radius: 10px;
+}
+.hero-count {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0px;
+}
+.hero-count .count-card {
+  /* padding: 0px 110px; */
+  display: flex;
+  align-items: center;
+}
+.hero-count .count-middle-card {
+  padding: 0px 10px;
+  border-right: 1px solid #eeeff2;
+  border-left: 1px solid #eeeff2;
+}
+.hero-count .hero-icon {
+  width: 55px;
+  height: 55px;
+  margin: 10px 0px;
+}
+.hero-count .count {
+  font-weight: 700;
+  font-size: 15px;
+}
+.hero-count .desc-title {
+  color: var(--light_color);
+  font-size: 15px;
+}
+
+@media (min-width: 769px) {
+  .hero {
+    padding-top: 90px;
+  }
+  .hero-content.first {
+    order: -1;
+  }
+
+  .hero-title {
+    font-size: 50px;
+  }
+  .hero-desc {
+    font-size: 16px;
+    padding: 10px 0px;
+    padding-right: 42px;
+  }
+  .hero-desc > span {
+    font-weight: 500;
+  }
+  .hero-btn {
+    margin-top: 40px;
+    box-shadow: 200px 65px 54px 0px #f5383866;
+  }
+  .hero-count {
+    flex-basis: 90%;
+    margin: auto;
+    justify-content: space-evenly;
+    box-shadow: 0px 14px 7px -1px #0d102511;
+    padding: 35px 0px;
+    border-radius: 10px;
+    margin-bottom: 90px;
+  }
+  .hero-count .count-card {
+    padding: 0px 115px;
+  }
+  .hero-count .hero-icon {
+    margin-right: 35px;
+  }
+}
+
+.hero-img-two > img {
+  max-height: 414px;
+  max-width: 500px;
+}
+.hero-title-two {
+  font-size: 35px;
+  font-weight: 500;
+}
+.hero-two-desc {
+  color: var(--light_color);
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.hero-content > ul {
+  color: var(--light_color);
+  list-style-position: inside;
+  list-style-image: url("../image/Icon/Vector\ \(1\).png");
+  margin-top: 2px;
+}
+.hero-content li {
+  padding-bottom: 15px;
+}

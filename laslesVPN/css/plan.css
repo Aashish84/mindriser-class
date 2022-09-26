@@ -1,0 +1,55 @@
+:root {
+  --bold_color: #0b132a;
+  --light_color: #4f5665;
+  --bg_red: #f53855;
+}
+
+.plan {
+  padding-top: 20px;
+  text-align: center;
+}
+.myplans {
+  padding-top: 15px;
+  border-radius: 10px;
+  box-shadow: var(--light_color) 0px 0px 2px 1px;
+  margin: 10px 25px 20px 25px;
+}
+.myplans.premium {
+  box-shadow: var(--bg_red) 0px 0px 2px 1px;
+}
+.myplans > img {
+  padding: 30px;
+}
+.myplans > ul {
+  list-style-position: inside;
+  list-style-image: url("../image/Icon/Vector.png");
+  padding-bottom: 100px;
+}
+.myplans li {
+  padding: 10px;
+}
+.myplans-buy {
+  background-color: #fff;
+  padding: 15px 60px;
+  border-radius: 50px;
+  border: none;
+  outline: var(--bg_red) solid 2px;
+  margin-bottom: 50px;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--bg_red);
+}
+.myplans-buy.premium {
+  color: #fff;
+  background-color: var(--bg_red);
+  box-shadow: var(--bg_red) 0px 19px 46px -10px;
+}
+@media (min-width: 769px) {
+  .plan {
+    padding-top: 80px;
+  }
+  .myplans {
+    padding-top: 60px;
+  }
+}

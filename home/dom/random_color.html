@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="changeColor()">change_background_color</button>
+    <script>
+      function changeColor() {
+        let arr = [
+          "red",
+          "yellow",
+          "green",
+          "blue",
+          "white",
+          "aqua",
+          "teal",
+          "aquamarine",
+          "black",
+          "grey",
+        ];
+        const rand_float = Math.random() * 10;
+        const rand_no = Math.floor(rand_float);
+        document.querySelector("body").style.backgroundColor = arr[rand_no];
+      }
+    </script>
+  </body>
+</html>

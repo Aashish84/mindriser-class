@@ -1,0 +1,28 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
+}
+.wrapper {
+  max-width: 100%;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.sign-up-btn {
+  outline: #f53855 solid 1px;
+  border-radius: 50px;
+  color: #f53855;
+  padding: 11px 43px;
+  margin: 2px 2px;
+}
+
+@media (min-width: 769px) {
+  .wrapper {
+    padding: 45px 130px;
+    padding-bottom: 0px;
+    max-width: 1440px;
+    margin: auto;
+  }
+}
