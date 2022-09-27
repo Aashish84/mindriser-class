@@ -1,0 +1,41 @@
+:root {
+  --bold_color: #0b132a;
+  --light_color: #4f5665;
+  --bg_red: #f53855;
+}
+
+.location {
+  padding-top: 100px;
+  text-align: center;
+}
+.location h2 {
+  max-width: 380px;
+  margin: auto;
+  font-size: 35px;
+  font-weight: 500;
+}
+.location p {
+  max-width: 555px;
+  margin: auto;
+  font-size: 16px;
+  color: var(--light_color);
+}
+.location span {
+  font-weight: 500;
+  color: var(--light_color);
+}
+.location img {
+  width: 100%;
+  padding-top: 100px;
+}
+.medias {
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: space-between;
+  align-items: center;
+}
+.medias img {
+  flex-basis: 20%;
+  /* max-height: 60px; */
+  max-width: 20%;
+}

@@ -1,14 +1,10 @@
-import { useNavigate } from "react-router-dom";
-
 function Login(props) {
-  const navigate = useNavigate();
   function handleSubmit(event) {
     event.preventDefault();
     const username = event.target.username.value;
     const password = event.target.password.value;
 
     props.validateLogin(username, password);
-    navigate("/user");
   }
 
   return (

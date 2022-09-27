@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 function FakeApiCall() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/todos")
@@ -13,7 +13,7 @@ function FakeApiCall() {
   return (
     <>
       <ul>
-        {data.length > 0 ? (
+        {data?.length > 0 ? (
           data.map((el, index) => (
             <li key={el.id}>
               {index} = {el.title}

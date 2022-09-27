@@ -1,0 +1,123 @@
+:root {
+  --bold_color: #0b132a;
+  --light_color: #4f5665;
+  --bg_red: #f53855;
+}
+.review {
+  text-align: center;
+  color: var(--bold_color);
+  padding-bottom: 30px;
+}
+.review-section-title {
+  font-size: 35px;
+  font-weight: 500;
+  max-width: 440px;
+  margin: auto;
+}
+.review-section-desc {
+  max-width: 555px;
+  margin: auto;
+  color: var(--light_color);
+  padding-top: 20px;
+  padding-bottom: 60px;
+}
+.review-card {
+  max-width: 400px;
+  margin: 10px auto;
+  padding: 20px;
+  border-radius: 10px;
+  outline: #dddddd solid 2px;
+}
+.review-card.active {
+  outline: var(--bg_red) solid 2px;
+}
+.review-card .reviewer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.review-card .reviewer-info {
+  display: flex;
+  align-items: center;
+}
+.review-card .reviewer-info > img {
+  width: 70px;
+  height: 50px;
+  padding: 0px 10px;
+}
+.review-card .rating {
+  display: flex;
+  align-items: center;
+}
+.review-card .rating > img {
+  margin-left: 5px;
+}
+.review-card p {
+  text-align: justify;
+  padding: 10px 0px;
+  font-size: 16px;
+}
+.review-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.review-index {
+  display: flex;
+}
+.review-index div {
+  width: 15px;
+  height: 15px;
+  margin: 3px;
+  border-radius: 50%;
+  background-color: #dde0e4;
+}
+.review-index .active {
+  width: 45px;
+  border-radius: 10px;
+  background-color: var(--bg_red);
+}
+.review-btns {
+  display: flex;
+  align-items: center;
+}
+
+.review-toggle .left,
+.review-toggle .right {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: var(--bg_red) solid 2px;
+  margin: 3px 10px;
+}
+.review-toggle .right {
+  transform: rotate(180deg);
+  background-color: var(--bg_red);
+}
+.arrow.white {
+  fill: #fff;
+}
+@media (min-width: 769px) {
+  .review {
+    overflow-x: hidden;
+  }
+  .review-card {
+    min-width: 400px;
+  }
+  .review-row {
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+  }
+  .review-card {
+    /* flex-basis: 35%; */
+    margin: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .review-toggle {
+    display: none;
+  }
+}

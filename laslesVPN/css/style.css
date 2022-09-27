@@ -3,6 +3,7 @@
   padding: 0px;
   box-sizing: border-box;
   font-family: "Rubik", sans-serif;
+  color: #0b132a;
 }
 .wrapper {
   max-width: 100%;
@@ -17,7 +18,10 @@
   padding: 11px 43px;
   margin: 2px 2px;
 }
-
+.bold {
+  color: #0b132a !important;
+  font-weight: 500;
+}
 @media (min-width: 769px) {
   .wrapper {
     padding: 45px 130px;

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form onsubmit="handleSubmit(event)">
+      <input type="text" name="todo" />
+      <button type="submit">submit</button>
+    </form>
+    <ul id="list">
+      <li>dummy <button>delete</button></li>
+    </ul>
+    <script>
+      let data = JSON.parse(localStorage.getItem("data"));
+      display();
+
+      function handleSubmit(event) {
+        event.preventDefault();
+        const item = event.target.todo.value;
+        data.push(item);
+        display();
+        localStorage.setItem("data", JSON.stringify(data));
+      }
+
+      function display() {
+        if (data) {
+          document.getElementById("list").innerHTML = "";
+          data.forEach((el, index) => {
+            document.getElementById(
+              "list"
+            ).innerHTML += `<li>${el} <button onclick="handleDelete(${index})"> delete </button></li>`;
+          });
+        }
+      }
+
+      function handleDelete(index) {
+        data = data.filter((el, i) => i !== index);
+        display();
+        localStorage.setItem("data", JSON.stringify(data));
+      }
+    </script>
+  </body>
+</html>

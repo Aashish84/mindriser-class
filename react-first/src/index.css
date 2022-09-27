@@ -24,6 +24,8 @@
 .about {
   display: flex;
   justify-content: center;
+  background-color: cadetblue;
+  padding: 20px;
 }
 .about h1 {
   padding-right: 20px;

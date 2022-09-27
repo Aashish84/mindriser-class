@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import Dashboard from "./components/Dashboard";
@@ -10,6 +10,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import Login from "./Login";
 
 function App() {
+  const navigate = useNavigate();
+
   const [loginStatus, setLoginStatus] = useState(false);
 
   function isLogin() {
@@ -19,6 +21,7 @@ function App() {
   function validateLogin(username, password) {
     if (username === "test" && password === "test") {
       setLoginStatus(true);
+      navigate("/user");
     }
   }
 
