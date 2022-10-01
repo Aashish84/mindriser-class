@@ -1,0 +1,31 @@
+* {
+  margin: 0px;
+}
+.header {
+  padding: 30px 0px;
+  background-color: azure;
+  display: flex;
+  justify-content: space-between;
+}
+.header h1 {
+  padding-left: 30px;
+}
+.header ul {
+  flex-grow: 1;
+  list-style-type: none;
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+.counter {
+  max-width: 300px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.seperate {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
