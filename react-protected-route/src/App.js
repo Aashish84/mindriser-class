@@ -9,8 +9,9 @@ import SingleUser from "./component/SingleUser";
 import ProtectedRoute from "./component/ProtectedRoute";
 import Login from "./component/Login";
 
-export const HeaderContext = createContext({ username: "", logOut: () => {} });
-export const LoginContext = createContext();
+export const HeaderContext = createContext();
+export const IsLoginContext = createContext();
+export const ValidateContext = createContext();
 
 function App() {
   const [username, setUsername] = useState();
@@ -30,23 +31,31 @@ function App() {
 
   return (
     <BrowserRouter>
-      <HeaderContext.Provider value={{ username, logOut }}>
+      <HeaderContext.Provider
+        value={{ username, logOut, setIsLogin, setUsername }}
+      >
         <Header logOut={logOut} username={username} />
       </HeaderContext.Provider>
 
-      <Routes>
-        <Route path="counter" element={<Counter />} />
-        <Route path="colorchanger" element={<ColorChanger />} />
+      <IsLoginContext.Provider value={isLogin}>
+        <Routes>
+          {/* <ValidateContext.Provider value={validateLogin}> */}
+          <Route
+            path="login"
+            element={
+              <Login validateLogin={validateLogin} setUsername={setUsername} />
+            }
+          />
+          {/* </ValidateContext.Provider> */}
 
-        {/* <LoginContext.Provider value={validateLogin}> */}
-        <Route path="login" element={<Login validateLogin={validateLogin} />} />
-        {/* </LoginContext.Provider> */}
-
-        <Route path="users" element={<ProtectedRoute loginStatus={isLogin} />}>
-          <Route index element={<Users />} />
-          <Route path=":id" element={<SingleUser />} />
-        </Route>
-      </Routes>
+          <Route path="counter" element={<Counter />} />
+          <Route path="colorchanger" element={<ColorChanger />} />
+          <Route path="users" element={<ProtectedRoute />}>
+            <Route index element={<Users />} />
+            <Route path=":id" element={<SingleUser />} />
+          </Route>
+        </Routes>
+      </IsLoginContext.Provider>
     </BrowserRouter>
   );
 }

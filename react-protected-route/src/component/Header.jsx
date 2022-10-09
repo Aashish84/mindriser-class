@@ -4,6 +4,12 @@ import { HeaderContext } from "../App";
 
 function Header() {
   const headerContext = useContext(HeaderContext);
+
+  function handleLogout() {
+    headerContext.setIsLogin(false);
+    headerContext.setUsername();
+  }
+
   return (
     // <header className="header">
     //   <h1>hello {props?.username}</h1>
@@ -23,7 +29,8 @@ function Header() {
         <Link to="/colorchanger">colorchanger</Link>
         <Link to="/users">users</Link>
         <Link to="/users/1">user/1</Link>
-        <button onClick={headerContext.logOut}>logout</button>
+        {/* <button onClick={headerContext.logOut}>logout</button> */}
+        <button onClick={handleLogout}>logout</button>
       </ul>
     </header>
   );

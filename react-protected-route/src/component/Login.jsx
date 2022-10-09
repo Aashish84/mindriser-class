@@ -1,11 +1,9 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoginContext } from "../App";
 
 function Login(props) {
+  // const loginContext = useContext(LoginContext);
   const navigate = useNavigate();
-  const loginContext = useContext(LoginContext);
-  console.log(loginContext);
+  // console.log(loginContext);
 
   const formStyle = {
     padding: "30px",
@@ -22,6 +20,7 @@ function Login(props) {
     if (username && password) {
       props.validateLogin(username, password);
     }
+    props.setUsername("asis");
     return navigate(-1);
   }
 
