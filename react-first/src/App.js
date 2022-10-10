@@ -38,7 +38,12 @@ function App() {
 
         <Route
           path="/login"
-          element={<Login validateLogin={validateLogin} />}
+          element={
+            <Login
+              validateLogin={validateLogin}
+              setLoginStatus={setLoginStatus}
+            />
+          }
         />
 
         <Route path="user" element={<ProtectedRoute isLogin={isLogin} />}>
