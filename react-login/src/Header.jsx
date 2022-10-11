@@ -14,10 +14,7 @@ function Header() {
         <Link to="/dashboard">dashboard</Link>
       </li>
       <li className="nav-item p-3">
-        <Link to="/login">login</Link>
-      </li>
-      <li className="nav-item p-3">
-        <Link to="/signup">signup</Link>
+        {!loginContext.isLogin && <Link to="/signin">signin</Link>}
       </li>
       <li className="nav-item p-3">
         {loginContext.isLogin ? (

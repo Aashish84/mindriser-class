@@ -37,6 +37,7 @@ export default function Signup(props) {
         [name]: value,
       };
     });
+    // setFormData({ ...formData, [name]: value });
   }
 
   function handleSubmit(e) {

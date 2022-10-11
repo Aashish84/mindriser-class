@@ -4,7 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./Header";
 import ProtectedRoute from "./ProtectedRoute";
 import Login from "./login";
-import Signup from "./Signup";
+
+import Signin from "./Signin";
 
 export const LoginContext = createContext();
 
@@ -23,7 +24,7 @@ export default function App() {
 
         <Route index element={<h1>hello</h1>} />
         <Route path="login" element={<Login setIsLogin={setIsLogin} />} />
-        <Route path="signup" element={<Signup isLogin={isLogin} />} />
+        <Route path="signin" element={<Signin isLogin={isLogin} />} />
       </Routes>
     </>
   );
