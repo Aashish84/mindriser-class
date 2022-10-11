@@ -1,4 +1,3 @@
-import { ErrorResponse } from "@remix-run/router";
 import React, { useEffect, useState } from "react";
 import ErrorMessage from "./components/ErrorMessage";
 
@@ -21,7 +20,7 @@ export default function Signin() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(formData);
+    console.log("call api ...");
     let errors = [
       {
         value: "",
@@ -73,7 +72,6 @@ export default function Signin() {
         [name]: type === "checkbox" ? checked : value,
       };
     });
-    // validateFormData();
   }
 
   return (
