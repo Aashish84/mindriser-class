@@ -7,7 +7,7 @@ export default function Signin() {
     password: "",
     email: "",
     phone: "",
-    termsAgreed: false,
+    termsAgreed: true,
   });
 
   const [formError, setFormError] = useState({
@@ -139,6 +139,7 @@ export default function Signin() {
           name="termsAgreed"
           value={formData.termsAgreed}
           onChange={handleChange}
+          checked={formData.termsAgreed}
         />
         <label htmlFor="chkbox">terms and condition</label>
         <ErrorMessage

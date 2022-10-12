@@ -14,6 +14,18 @@ function Header() {
         <Link to="/dashboard">dashboard</Link>
       </li>
       <li className="nav-item p-3">
+        <Link to="/counter">counter</Link>
+      </li>
+      <li className="nav-item p-3">
+        <Link to="/todo">todo</Link>
+      </li>
+      <li className="nav-item p-3">
+        <Link to="/form">form</Link>
+      </li>
+      <li className="nav-item p-3">
+        <Link to="/formReducer">formReducer</Link>
+      </li>
+      <li className="nav-item p-3">
         {!loginContext.isLogin && <Link to="/signin">signin</Link>}
       </li>
       <li className="nav-item p-3">
