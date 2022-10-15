@@ -38,16 +38,21 @@ function App() {
       </HeaderContext.Provider>
 
       <IsLoginContext.Provider value={isLogin}>
-        <Routes>
-          {/* <ValidateContext.Provider value={validateLogin}> */}
-          <Route
-            path="login"
-            element={
-              <Login validateLogin={validateLogin} setUsername={setUsername} />
-            }
-          />
-          {/* </ValidateContext.Provider> */}
+        <ValidateContext.Provider value={validateLogin}>
+          <Routes>
+            <Route
+              path="login"
+              element={
+                <Login
+                  validateLogin={validateLogin}
+                  setUsername={setUsername}
+                />
+              }
+            />
+          </Routes>
+        </ValidateContext.Provider>
 
+        <Routes>
           <Route path="counter" element={<Counter />} />
           <Route path="colorchanger" element={<ColorChanger />} />
           <Route path="users" element={<ProtectedRoute />}>
