@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { resetCart } from "../features/cart/cartSlice";
+import { getCartItems } from "../features/cart/cartSlice";
 import { openModel } from "../features/modal/modalSlice";
 import CartItems from "./CartItems";
 
@@ -14,7 +14,7 @@ export default function CartContainer() {
         <h1>no items in cart</h1>{" "}
         <button
           className="btn btn-primary m-auto"
-          onClick={() => dispatch(resetCart())}
+          onClick={() => dispatch(getCartItems())}
         >
           reset cart
         </button>
