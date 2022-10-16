@@ -78,6 +78,7 @@ export default function Login() {
             name="email"
             value={loginData.email}
             onChange={handleChange}
+            disabled={isAPILoading}
           />
         </div>
         <div className="form-group">
@@ -90,18 +91,24 @@ export default function Login() {
             name="password"
             value={loginData.password}
             onChange={handleChange}
+            disabled={isAPILoading}
           />
         </div>
         <h5 className="m-2 text-danger">{apiError}</h5>
         <div className="d-flex justify-content-evenly align-items-center">
           <div className="d-flex align-items-center">
-            <button type="submit" className="btn btn-primary">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={isAPILoading}
+            >
               Login
             </button>
             {isAPILoading && (
               <div className="spinner-border m-2" role="status"></div>
             )}
           </div>
+
           <Link type="submit" className="" to="/signup">
             Sign Up
           </Link>

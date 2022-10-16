@@ -1,34 +1,81 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 export default function Signup() {
   const { isLoggedIn } = useSelector((store) => store.user);
-
-  const [apiError, setAPIError] = useState("default");
-  const [isAPILoading, setIsAPILoading] = useState(false);
-
   const navigate = useNavigate();
+
+  const [apiError, setAPIError] = useState("");
+  const [isAPILoading, setIsAPILoading] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "asis",
     email: "asis@test1.com",
     password: "asis1234",
     role: "buyer",
+    confirmPassword: "asis1234",
   });
 
+  const [formDataError, setFormDataError] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "",
+    confirmPassword: "",
+  });
+
+  // check if confirm password and password are equal
+  useEffect(() => {
+    let newPasswordError = "";
+    if (formData.password !== formData.confirmPassword) {
+      newPasswordError = " password not matched";
+    }
+    setFormDataError((prev) => {
+      return {
+        ...prev,
+        password: newPasswordError,
+      };
+    });
+  }, [formData.password, formData.confirmPassword]);
+
+  // check if already logged in
   if (isLoggedIn) {
     return <Navigate to="/" />;
+  }
+
+  // function to check if any field is empty
+  // return true if first empty field found
+  function ifFormDataEmpty() {
+    for (let key in formData) {
+      if (!formData[key]) {
+        setFormDataError((prev) => {
+          return {
+            ...prev,
+            [key]: " required",
+          };
+        });
+        return true;
+      }
+    }
+    return false;
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     setIsAPILoading(true);
-    let url = "https://mern-ecommerce70.herokuapp.com/api/users/signup";
 
+    // check if any form field is empty
+    // return if any empty
+    if (ifFormDataEmpty()) {
+      setIsAPILoading(false);
+      return;
+    }
+
+    // api call after submit
     try {
+      let url = "https://mern-ecommerce70.herokuapp.com/api/users/signup";
       let res = await axios.post(url, formData);
       if (res.status === 200) {
         return navigate("/login");
@@ -61,6 +108,7 @@ export default function Signup() {
             className="form-label required-field"
           >
             Email name
+            <span className="text-danger ">{formDataError.name}</span>
           </label>
           <input
             type="text"
@@ -79,6 +127,7 @@ export default function Signup() {
             className="form-label required-field"
           >
             Email address
+            <span className="text-danger ">{formDataError.email}</span>
           </label>
           <input
             type="email"
@@ -98,6 +147,7 @@ export default function Signup() {
             className="form-label required-field"
           >
             Password
+            <span className="text-danger ">{formDataError.password}</span>
           </label>
           <input
             type="password"
@@ -109,6 +159,24 @@ export default function Signup() {
             onChange={handleChange}
           />
         </div>
+        <div className="form-group">
+          <label
+            htmlFor="exampleInputPassword2"
+            className="form-label required-field"
+          >
+            Confirm Password :
+            <span className="text-danger">{formDataError.confirmPassword}</span>
+          </label>
+          <input
+            type="password"
+            className="form-control"
+            id="exampleInputPassword2"
+            placeholder="Password"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+          />
+        </div>
 
         <div className="form-group">
           <label
@@ -116,6 +184,7 @@ export default function Signup() {
             className="form-label required-field"
           >
             Role
+            <span className="text-danger">{formDataError.role}</span>
           </label>
           <select
             className="m-2"
@@ -124,7 +193,7 @@ export default function Signup() {
             onChange={handleChange}
             value={formData.role}
           >
-            <option disabled value={"DEFAULT"} hidden>
+            <option disabled value={""} hidden>
               ...
             </option>
             <option value="seller">seller</option>
