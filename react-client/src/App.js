@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -12,9 +12,11 @@ import Cart from "./pages/Cart";
 import Order from "./pages/Order";
 import { setUser } from "./redux/reducer/userSlice";
 import PageNotFound from "./pages/PageNotFound";
+import Product from "./pages/Product";
 
 export default function App() {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
 
   // fetch user form jwt-token on localStorage
   async function fetchInitialUser() {
@@ -34,6 +36,9 @@ export default function App() {
       } catch (error) {
         console.log("log in for better experience");
       }
+      setLoading(false);
+    } else {
+      setLoading(false);
     }
   }
 
@@ -43,6 +48,21 @@ export default function App() {
   }, []);
 
   console.log("App render..");
+
+  if (loading) {
+    return (
+      <div className="vh-100 row align-items-center justify-content-center">
+        <button className="btn btn-primary col-1" type="button" disabled>
+          <span
+            className="spinner-border spinner-border-sm me-2"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Loading...
+        </button>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -57,6 +77,8 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<Order />} />
         </Route>
+
+        <Route path="/product/:id" element={<Product />} />
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>

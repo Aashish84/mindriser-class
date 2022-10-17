@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { logOutUser } from "../redux/reducer/userSlice";
+import { logOutUserWrapper } from "../redux/reducer/userSlice";
 
 export default function Navbar() {
   const { isLoggedIn, user } = useSelector((store) => store.user);
@@ -45,7 +45,7 @@ export default function Navbar() {
               <button
                 className="text-primary bg-dark border-0"
                 onClick={() => {
-                  dispatch(logOutUser());
+                  dispatch(logOutUserWrapper());
                 }}
               >
                 logOut

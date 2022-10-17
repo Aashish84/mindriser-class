@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { clearCart } from "./cartSlice";
 
 const initialState = {
   user: null,
@@ -31,5 +32,21 @@ export const userSlice = createSlice({
 });
 
 export const { setUser, logOutUser, updateLoginStatus } = userSlice.actions;
+
+// redux-thunk
+export function logOutUserWrapper() {
+  return function thunkFunction(dispatch, getState) {
+    const cartItems = getState().cart.cart.length;
+    // console.log({ cartItems });
+    if (cartItems <= 0) {
+      dispatch(logOutUser());
+    }
+
+    if (window.confirm("remove cart item and logout?")) {
+      dispatch(clearCart());
+      dispatch(logOutUser());
+    }
+  };
+}
 
 export default userSlice.reducer;

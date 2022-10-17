@@ -2,3 +2,7 @@
   content: " * ";
   color: red;
 }
+
+.none-list-style {
+  list-style-type: none;
+}
