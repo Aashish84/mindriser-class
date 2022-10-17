@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  cart: [],
+  cartItems: [],
   cartSet: [],
+  total: 0,
+  amount: 0,
 };
 
 export const cartSlice = createSlice({
@@ -15,17 +17,64 @@ export const cartSlice = createSlice({
         return;
       }
 
-      state.cart.push(action.payload);
+      const tmpObj = {
+        _id: action.payload._id,
+        name: action.payload.name,
+        price: action.payload.price,
+        image: action.payload.images[0],
+        quantity: 1,
+      };
+      state.cartItems.push(tmpObj);
 
       state.cartSet.push(action.payload._id);
     },
-    clearCart: (state) => {
-      state.cart = [];
+    clearcartItems: (state) => {
+      state.cartItems = [];
+      state.cartSet = [];
+    },
+    removeItem: (state, action) => {
+      const itemID = action.payload;
+      state.cartItems = state.cartItems.filter((item) => item._id !== itemID);
+      state.cartSet = state.cartSet.filter((item) => item !== itemID);
+    },
+    toggleItemQty: (state, action) => {
+      const { amt, _id: itemID } = action.payload;
+
+      let startLen = state.cartItems.length;
+
+      state.cartItems = state.cartItems.filter((item) => {
+        if (item._id === itemID) {
+          item.quantity += amt;
+        }
+        return item.quantity > 0;
+      });
+
+      let endLen = state.cartItems.length;
+
+      if (startLen !== endLen) {
+        state.cartSet = state.cartSet.filter((item) => item !== itemID);
+      }
+    },
+    updateAmtTotal: (state) => {
+      let amount = 0;
+      let total = 0;
+      state.cartItems.forEach((item) => {
+        total += item.price * item.quantity;
+        amount += item.quantity;
+      });
+      state.amount = amount;
+      state.total = total.toFixed(2);
     },
   },
 });
 
-export const { addProduct, clearCart } = cartSlice.actions;
+export const {
+  addProduct,
+  clearCart,
+  removeItem,
+  toggleItemQty,
+  updateAmtTotal,
+} = cartSlice.actions;
 
 // redux thunk
 // add product only if logged in
