@@ -3,20 +3,28 @@ import axios from "axios";
 import ReactPaginate from "react-paginate";
 
 import Card from "../components/Card";
+import FilterCard from "../components/FilterCard";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
   // for url and url_query
   const [totalPage, setTotalPage] = useState(0);
+  const [isAPILoading, setIsAPILoading] = useState(false);
   let perPage = 12;
   const [url, setUrl] = useState(
     `https://mern-ecommerce70.herokuapp.com/api/products?page=1&per_page=${perPage}`
   );
 
   async function getProducts() {
-    const res = await axios.get(url);
-    setProducts(res.data.data[0].data);
-    setTotalPage(res.data.data[0].metadata[0].total);
+    setIsAPILoading(true);
+    try {
+      const res = await axios.get(url);
+      setProducts(res.data.data[0].data);
+      setTotalPage(res.data.data[0].metadata[0].total);
+    } catch (error) {
+      console.log({ error });
+    }
+    setIsAPILoading(false);
   }
 
   useEffect(() => {
@@ -38,25 +46,31 @@ export default function Home() {
     <>
       <div className="container">
         <div className="row ">
-          {products.map((product) => {
-            return <Card product={product} key={product._id} />;
-          })}
+          <div className="col-3 vh-100 bg-light sticky-top">
+            <FilterCard setUrl={setUrl} isAPILoading={isAPILoading} />
+          </div>
+          <div className="col-9 row">
+            {products.map((product) => {
+              return <Card product={product} key={product._id} />;
+            })}
+
+            {/* paginate links */}
+            <ReactPaginate
+              className="none-list-style d-flex m-2 justify-content-center"
+              breakLinkClassName="none-list-style"
+              pageLinkClassName="p-2 text-decoration-none"
+              activeLinkClassName="text-danger"
+              breakLabel="..."
+              nextLabel=">>"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={3}
+              pageCount={Math.ceil(totalPage / perPage)}
+              previousLabel="<<"
+              renderOnZeroPageCount={null}
+            />
+          </div>
         </div>
       </div>
-      {/* paginate links */}
-      <ReactPaginate
-        className="none-list-style d-flex m-2 justify-content-center"
-        breakLinkClassName="none-list-style"
-        pageLinkClassName="p-2 text-decoration-none"
-        activeLinkClassName="text-danger"
-        breakLabel="..."
-        nextLabel=">>"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
-        pageCount={Math.ceil(totalPage / perPage)}
-        previousLabel="<<"
-        renderOnZeroPageCount={null}
-      />
     </>
   );
 }

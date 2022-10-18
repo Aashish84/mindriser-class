@@ -6,7 +6,7 @@ import CardBtn from "./CardBtn";
 
 export default function Card({ product }) {
   return (
-    <div className="col-3 p-2" key={product._id}>
+    <div className="col-4 p-2" key={product._id}>
       <div className="card" style={{ width: "18rem" }}>
         <img
           className="card-img-top"
