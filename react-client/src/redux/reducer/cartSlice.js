@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  cartItems: [],
-  cartSet: [],
+  cartItems: JSON.parse(localStorage.getItem("cartData")) || [],
   total: 0,
   amount: 0,
 };
@@ -12,48 +11,40 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addProduct: (state, action) => {
-      if (state.cartSet.includes(action.payload._id)) {
-        alert(`${action.payload.name} already added to cart`);
-        return;
+      const status = state.cartItems.find(
+        (item) => item._id === action.payload._id
+      );
+
+      if (!status) {
+        const tmpObj = {
+          _id: action.payload._id,
+          name: action.payload.name,
+          price: action.payload.price,
+          image: action.payload.images[0],
+          quantity: 1,
+        };
+        state.cartItems.push(tmpObj);
       }
-
-      const tmpObj = {
-        _id: action.payload._id,
-        name: action.payload.name,
-        price: action.payload.price,
-        image: action.payload.images[0],
-        quantity: 1,
-      };
-      state.cartItems.push(tmpObj);
-
-      state.cartSet.push(action.payload._id);
+      localStorage.setItem("cartData", JSON.stringify(state.cartItems));
     },
-    clearcartItems: (state) => {
+    clearCart: (state) => {
       state.cartItems = [];
-      state.cartSet = [];
+      localStorage.removeItem("cartData");
     },
     removeItem: (state, action) => {
       const itemID = action.payload;
       state.cartItems = state.cartItems.filter((item) => item._id !== itemID);
-      state.cartSet = state.cartSet.filter((item) => item !== itemID);
+      localStorage.setItem("cartData", JSON.stringify(state.cartItems));
     },
     toggleItemQty: (state, action) => {
       const { amt, _id: itemID } = action.payload;
-
-      let startLen = state.cartItems.length;
-
       state.cartItems = state.cartItems.filter((item) => {
         if (item._id === itemID) {
           item.quantity += amt;
         }
         return item.quantity > 0;
       });
-
-      let endLen = state.cartItems.length;
-
-      if (startLen !== endLen) {
-        state.cartSet = state.cartSet.filter((item) => item !== itemID);
-      }
+      localStorage.setItem("cartData", JSON.stringify(state.cartItems));
     },
     updateAmtTotal: (state) => {
       let amount = 0;

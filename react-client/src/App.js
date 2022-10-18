@@ -12,7 +12,7 @@ import Cart from "./pages/Cart";
 import Order from "./pages/Order";
 import { setUser } from "./redux/reducer/userSlice";
 import PageNotFound from "./pages/PageNotFound";
-import Product from "./pages/Product";
+import Show from "./pages/product/Show";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -78,7 +78,7 @@ export default function App() {
           <Route path="/order" element={<Order />} />
         </Route>
 
-        <Route path="/product/:id" element={<Product />} />
+        <Route path="/product/:id" element={<Show />} />
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>

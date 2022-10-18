@@ -29,16 +29,18 @@ export const { setUser, logOutUser, updateLoginStatus } = userSlice.actions;
 // redux-thunk
 export function logOutUserWrapper() {
   return function thunkFunction(dispatch, getState) {
-    const cartItems = getState().cart.cartSet.length;
+    const cartItems = getState().cart.cartItems.length;
     // console.log({ cartItems });
     if (cartItems <= 0) {
       dispatch(logOutUser());
+      return;
     }
 
     if (window.confirm("remove cart item and logout?")) {
       dispatch(clearCart());
       dispatch(logOutUser());
     }
+    return;
   };
 }
 

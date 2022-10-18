@@ -6,3 +6,7 @@
 .none-list-style {
   list-style-type: none;
 }
+
+.carousel-height {
+  height: 500px;
+}

@@ -44,17 +44,10 @@ export default function CartItem({ _id, name, price, image, quantity }) {
             className="btn btn-danger ms-4 p-1 m-2"
             onClick={() => dispatch(removeItem(_id))}
           >
-            {" "}
-            remove{" "}
+            remove
           </button>
         </div>
-        <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-          <a href="#!" className="text-muted">
-            <i className="fas fa-times"></i>
-          </a>
-        </div>
       </div>
-
       <hr className="my-4" />
     </>
   );

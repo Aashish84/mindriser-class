@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
 import CartItem from "../components/CartItem";
 import { updateAmtTotal } from "../redux/reducer/cartSlice";
 
@@ -12,7 +13,6 @@ export default function Cart() {
     dispatch(updateAmtTotal());
     // eslint-disable-next-line
   }, [cartItems]);
-  console.log(cartItems);
 
   return (
     <section className="h-100 ">
