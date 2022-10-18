@@ -12,18 +12,25 @@ export default function Home() {
   const [isAPILoading, setIsAPILoading] = useState(false);
   let perPage = 12;
   const [url, setUrl] = useState(
-    `https://mern-ecommerce70.herokuapp.com/api/products?page=1&per_page=${perPage}`
+    `${process.env.REACT_APP_API_URL}/products?page=1&per_page=${perPage}`
   );
 
   async function getProducts() {
     setIsAPILoading(true);
     try {
       const res = await axios.get(url);
-      setProducts(res.data.data[0].data);
-      setTotalPage(res.data.data[0].metadata[0].total);
+
+      if (res.data.data[0].data.length !== 0) {
+        setProducts(res.data.data[0].data);
+        setTotalPage(res.data.data[0].metadata[0].total);
+        setIsAPILoading(false);
+        return;
+      }
     } catch (error) {
       console.log({ error });
     }
+    setProducts([]);
+    setTotalPage(0);
     setIsAPILoading(false);
   }
 
@@ -47,27 +54,37 @@ export default function Home() {
       <div className="container">
         <div className="row ">
           <div className="col-3 vh-100 bg-light sticky-top">
-            <FilterCard setUrl={setUrl} isAPILoading={isAPILoading} />
+            <FilterCard
+              setUrl={setUrl}
+              isAPILoading={isAPILoading}
+              perPage={perPage}
+            />
           </div>
           <div className="col-9 row">
-            {products.map((product) => {
-              return <Card product={product} key={product._id} />;
-            })}
+            {products.length > 0 ? (
+              <>
+                {products.map((product) => {
+                  return <Card product={product} key={product._id} />;
+                })}
 
-            {/* paginate links */}
-            <ReactPaginate
-              className="none-list-style d-flex m-2 justify-content-center"
-              breakLinkClassName="none-list-style"
-              pageLinkClassName="p-2 text-decoration-none"
-              activeLinkClassName="text-danger"
-              breakLabel="..."
-              nextLabel=">>"
-              onPageChange={handlePageClick}
-              pageRangeDisplayed={3}
-              pageCount={Math.ceil(totalPage / perPage)}
-              previousLabel="<<"
-              renderOnZeroPageCount={null}
-            />
+                {/* paginate links */}
+                <ReactPaginate
+                  className="none-list-style d-flex m-2 justify-content-center"
+                  breakLinkClassName="none-list-style"
+                  pageLinkClassName="p-2 text-decoration-none"
+                  activeLinkClassName="text-danger"
+                  breakLabel="..."
+                  nextLabel=">>"
+                  onPageChange={handlePageClick}
+                  pageRangeDisplayed={3}
+                  pageCount={Math.ceil(totalPage / perPage)}
+                  previousLabel="<<"
+                  renderOnZeroPageCount={null}
+                />
+              </>
+            ) : (
+              <h1 className="text-center text-danger">zero products found</h1>
+            )}
           </div>
         </div>
       </div>
