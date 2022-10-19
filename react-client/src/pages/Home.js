@@ -7,12 +7,14 @@ import FilterCard from "../components/FilterCard";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+  // for pagitnate
+  const [page, setPage] = useState(0);
+
   // for url and url_query
   const [totalPage, setTotalPage] = useState(0);
   const [isAPILoading, setIsAPILoading] = useState(false);
-  let perPage = 12;
   const [url, setUrl] = useState(
-    `${process.env.REACT_APP_API_URL}/products?page=1&per_page=${perPage}`
+    `${process.env.REACT_APP_API_URL}/products?page=1&per_page=${process.env.REACT_APP_PER_PAGE}`
   );
 
   async function getProducts() {
@@ -35,18 +37,22 @@ export default function Home() {
   }
 
   useEffect(() => {
+    console.log(url);
     getProducts();
     // eslint-disable-next-line
   }, [url]);
 
   // for pagination
   const handlePageClick = (event) => {
-    // console.log(event.selected);
-    setUrl(
-      `https://mern-ecommerce70.herokuapp.com/api/products?page=${
-        event.selected + 1
-      }&per_page=${perPage}`
-    );
+    // only change page - ?page=1&
+    const afterIndex = url.search("&");
+    const beforeIndex = url.search("\\?");
+
+    const beforePage = url.substring(beforeIndex, 0);
+    const afterPage = url.substring(afterIndex + 1);
+
+    setUrl(`${beforePage}?page=${event.selected + 1}&${afterPage}`);
+    setPage(event.selected);
   };
 
   return (
@@ -57,7 +63,7 @@ export default function Home() {
             <FilterCard
               setUrl={setUrl}
               isAPILoading={isAPILoading}
-              perPage={perPage}
+              setPage={setPage}
             />
           </div>
           <div className="col-9 row">
@@ -69,6 +75,7 @@ export default function Home() {
 
                 {/* paginate links */}
                 <ReactPaginate
+                  forcePage={page}
                   className="none-list-style d-flex m-2 justify-content-center"
                   breakLinkClassName="none-list-style"
                   pageLinkClassName="p-2 text-decoration-none"
@@ -77,7 +84,9 @@ export default function Home() {
                   nextLabel=">>"
                   onPageChange={handlePageClick}
                   pageRangeDisplayed={3}
-                  pageCount={Math.ceil(totalPage / perPage)}
+                  pageCount={Math.ceil(
+                    totalPage / process.env.REACT_APP_PER_PAGE
+                  )}
                   previousLabel="<<"
                   renderOnZeroPageCount={null}
                 />

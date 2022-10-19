@@ -68,7 +68,7 @@ export const {
 } = cartSlice.actions;
 
 // redux thunk
-// add product only if logged in
+// add product to cart only if logged in
 export function addProductWrapper(payload) {
   return function thunkFunction(dispatch, getState) {
     let { isLoggedIn } = getState().user;
@@ -77,6 +77,7 @@ export function addProductWrapper(payload) {
       return;
     }
     alert("please login first");
+    // return <Navigate to="/login" />;
   };
 }
 

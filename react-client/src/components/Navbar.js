@@ -29,16 +29,27 @@ export default function Navbar() {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link text-primary" to="/cart">
-                cart
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-primary" to="/order">
-                order
-              </Link>
-            </li>
+            {isLoggedIn && user.role === process.env.REACT_APP_BUYER && (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link text-primary" to="/cart">
+                    cart
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link text-primary" to="/order">
+                    order
+                  </Link>
+                </li>
+              </>
+            )}
+            {isLoggedIn && user.role === process.env.REACT_APP_SELLER && (
+              <li className="nav-item">
+                <Link className="nav-link text-primary" to="/product/create">
+                  create
+                </Link>
+              </li>
+            )}
           </ul>
           <div className="navbar-nav ms-auto">
             {isLoggedIn ? (

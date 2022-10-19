@@ -11,10 +11,12 @@ export default function FilterCard(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(filterData);
+
     props.setUrl(
-      `${process.env.REACT_APP_API_URL}/products?page=1&per_page=${props.perPage}&search_term=${filterData.search_term}&price_from=${filterData.price_from}`
+      `${process.env.REACT_APP_API_URL}/products?page=1&per_page=${process.env.REACT_APP_PER_PAGE}&search_term=${filterData.search_term}&price_from=${filterData.price_from}&price_to=${filterData.price_to}`
     );
+    // change to first page
+    props.setPage(0);
   }
 
   function handleChange(e) {
@@ -39,15 +41,18 @@ export default function FilterCard(props) {
       </div>
       <form onSubmit={handleSubmit}>
         <div className="mb-2">
+          {/* clear button */}
           <button
             type="button"
             className="btn btn-danger"
             onClick={() => {
               props.setUrl(
                 // initial url of home
-                `${process.env.REACT_APP_API_URL}/products?page=1&per_page=${props.perPage}`
+                `${process.env.REACT_APP_API_URL}/products?page=1&per_page=${process.env.REACT_APP_PER_PAGE}`
               );
               setFilterData(initialInput);
+              //   change to first page
+              props.setPage(0);
             }}
           >
             clear all filter

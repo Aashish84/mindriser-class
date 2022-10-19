@@ -13,6 +13,7 @@ import Order from "./pages/Order";
 import { setUser } from "./redux/reducer/userSlice";
 import PageNotFound from "./pages/PageNotFound";
 import Show from "./pages/product/Show";
+import Create from "./pages/product/Create";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -69,17 +70,39 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route index element={<Home />} />
-
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
-        <Route element={<ProtectedRoute />}>
+        {/* only access by buyer */}
+        <Route element={<ProtectedRoute role={process.env.REACT_APP_BUYER} />}>
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<Order />} />
         </Route>
 
-        <Route path="/product/:id" element={<Show />} />
+        {/* accessed by any role but should be login */}
+        <Route element={<ProtectedRoute />}>
+          <Route
+            path="/both"
+            element={
+              <h1 className="text-center">
+                accessed by any role but should be login
+              </h1>
+            }
+          />
+        </Route>
 
+        <Route path="product">
+          <Route path=":id" element={<Show />} />
+
+          {/* only access by seller */}
+          <Route
+            element={<ProtectedRoute role={process.env.REACT_APP_SELLER} />}
+          >
+            <Route path="create" element={<Create />} />
+          </Route>
+        </Route>
+
+        {/* 404 page */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
