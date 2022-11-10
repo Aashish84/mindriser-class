@@ -13,7 +13,7 @@ export default function ImageInput({ formData, setFormData }) {
 
   function handleChange(e, index) {
     setFormData((prev) => {
-      prev.images[index] = e.target.value;
+      prev.images[index] = e.target.files[0];
       return { ...prev };
     });
   }
@@ -25,7 +25,7 @@ export default function ImageInput({ formData, setFormData }) {
           <li className="list-group-item" key={index}>
             <input
               type="file"
-              value={formData.images[index]}
+              // value={formData.images[index]}
               onChange={(e) => handleChange(e, index)}
             />
             <button type="button" onClick={() => removeInput(index)}>
