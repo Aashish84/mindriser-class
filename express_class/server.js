@@ -10,14 +10,13 @@ const app = express();
 app.use(express.json());
 
 app.get("/register", async (req, res) => {
-  let user;
   try {
     let hased_pw = await bcrypt.hash(req.body.password, 10);
-    user = await User.create({ ...req.body, password: hased_pw });
+    const user = await User.create({ ...req.body, password: hased_pw });
+    res.status(200).send({ user });
   } catch (error) {
-    return res.status(400).json({ error });
+    return res.status(400).json(error.message);
   }
-  res.status(200).send({ user });
 });
 
 app.post("/login", async (req, res) => {
