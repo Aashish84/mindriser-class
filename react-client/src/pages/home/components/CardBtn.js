@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import CartBtn from "./CartBtn";
+import CartBtn from "../../../components/CartBtn";
 
 export default function CardBtn({ product }) {
   const { cartItems } = useSelector((store) => store.cart);

@@ -15,7 +15,7 @@ app.get("/register", async (req, res) => {
     const user = await User.create({ ...req.body, password: hased_pw });
     res.status(200).send({ user });
   } catch (error) {
-    return res.status(400).json(error.message);
+    next(error);
   }
 });
 
@@ -70,6 +70,10 @@ const jwtMiddleware = async (req, res, next) => {
 
 app.get("/protected", jwtMiddleware, async (req, res) => {
   res.status(200).send("hello");
+});
+
+app.use((err, req, res, next) => {
+  console.log(err);
 });
 
 app.listen(8000, () => {

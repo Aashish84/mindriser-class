@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
-import CardBtn from "../../components/CardBtn";
+import CardBtn from "../home/components/CardBtn";
 
 export default function Show() {
   const { id } = useParams();

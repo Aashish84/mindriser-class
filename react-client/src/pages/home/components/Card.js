@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import new_product from "../assets/image/new-product.jpg";
+import new_product from "../../../assets/image/new-product.jpg";
 import CardBtn from "./CardBtn";
 
 export default function Card({ product }) {

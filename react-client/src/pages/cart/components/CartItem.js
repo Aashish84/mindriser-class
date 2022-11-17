@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { removeItem, toggleItemQty } from "../redux/reducer/cartSlice";
+import { removeItem, toggleItemQty } from "../../../redux/reducer/cartSlice";
 
-import new_product from "../assets/image/new-product.jpg";
+import new_product from "../../../assets/image/new-product.jpg";
 
 export default function CartItem({ _id, name, price, image, quantity }) {
   const dispatch = useDispatch();

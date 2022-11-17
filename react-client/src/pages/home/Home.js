@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 
-import Card from "../components/Card";
-import FilterCard from "../components/FilterCard";
+import Card from "./components/Card";
+import FilterCard from "./components/FilterCard";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
